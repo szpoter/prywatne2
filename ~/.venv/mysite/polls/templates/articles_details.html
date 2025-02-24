@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+    <link rel="icon" href="/polls/icons/1.png" type="image/png">
+      <style>
+     .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .article-content {
+            margin-bottom: 20px;
+        }
+
+        .article-price {
+            margin-bottom: 20px;
+        }
+
+        .like-dislike-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .like-dislike-buttons form {
+            margin: 0;
+        }
+
+        .like-dislike-buttons button {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .like-dislike-buttons button:hover {
+            background-color: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 10px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            h5 {
+                font-size: 16px;
+            }
+
+            .like-dislike-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .like-dislike-buttons button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            h5 {
+                font-size: 14px;
+            }
+
+            .like-dislike-container span {
+                font-size: 14px;
+            }
+        } 
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="article-container">
+        <div class="article-title">{{ article.title }}</div>
+        <div class="article-content">{{ article.content }}</div>
+        <div class="article-price">Price per day: ${{ article.price }}</div>
+        <form action="{% url 'add_to_cart' article.id %}" method="post">
+            {% csrf_token %}
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1">
+            <label for="days">Days:</label>
+            <input type="number" id="days" name="days" value="1" min="1">
+            <button type="submit">Add to Cart</button>
+        </form>
+        <a href="/homepage/" class="back-link">Back to home page</a>
+    </div>
+</body>
+</html>

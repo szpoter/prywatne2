@@ -1,0 +1,120 @@
+<!-- filepath: /c:/Users/Nikodem/Desktop/github/prywatne2/~/.venv/mysite/polls/templates/articles.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offers</title>
+    <link rel="icon" href="{% static 'polls/icons/1.png' %}" type="image/png">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center; /* Center the text inside the container */
+        }
+
+        .text-container {
+            flex: 2;
+            text-align: justify;
+        }
+
+        .text-container h1 {
+            font-family: 'Times New Roman';
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .text-container p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            text-align: left; /* Align list items to the left */
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        ul li a:hover {
+            color: #0056b3;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .text-container h1 {
+                font-size: 24px;
+            }
+
+            .text-container p {
+                font-size: 16px;
+            }
+
+            ul li a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Offers</h1>
+        <ul>
+            {% for article in articles %}
+            <li>
+                <a href="{% url 'argument' article.id %}">{{ article.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
