@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ri_7e0oq_p!w3e8(r%r^!r-be!)$6qnl5=2b^jm*&s04s%8v14
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fulpmesequipmentrental.onrender.com']
 
 
 # Application definition
@@ -75,12 +75,20 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+import os
+from urllib.parse import urlparse
+
+url = urlparse(os.getenv('DATABASE_URL'))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
