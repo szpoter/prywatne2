@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ article.title }}</title>
-    <link rel="icon" href="/polls/icons/1.png" type="image/png">
+    <link rel="icon" href="{% static 'polls/icons/1.png' %}" type="image/png">
     <div class="title-container" style="background-image: url('/static/icons/ski.jpg');">
     </div>
    
@@ -124,6 +124,7 @@
                 }
                 
                 .title-container {
+                    background-image: url("{% static 'polls/photos/ski.jpg' %}");
                     background-size: cover;
                     background-position: center;
                     height: 400px;
@@ -264,18 +265,29 @@
     {% include 'navbar.html' %}
     <div class="article-container">
         <div class="article-title">{{ article.title }}</div>
-        <div class="article-content"><a>The Superior Ski Set is the ultimate choice for expert skiers seeking the best in performance and technology. This set includes cutting-edge skis that deliver unmatched precision and responsiveness, allowing you to carve through the snow with ease. The skis are engineered with the latest materials, ensuring maximum strength and minimal weight. Available in lengths from 170cm to 200cm, these skis are perfect for those who push the limits of their skiing abilities. The set also includes premium ski boots that offer exceptional fit and support, enhancing your overall skiing experience. Elevate your performance with the Superior Ski Set.</a></div>
+        <div class="article-content"><p>The Superior Ski Set is the ultimate choice for expert skiers seeking the best in performance and technology. This set includes cutting-edge skis that deliver unmatched precision and responsiveness, allowing you to carve through the snow with ease. The skis are engineered with the latest materials, ensuring maximum strength and minimal weight. Available in lengths from 170cm to 200cm, these skis are perfect for those who push the limits of their skiing abilities. The set also includes premium ski boots that offer exceptional fit and support, enhancing your overall skiing experience. Elevate your performance with the Superior Ski Set.</p></div>
         <div class="article-price">Price per day: ${{ article.price }}</div>
-        <form action="{% url 'add_to_cart' article.id %}" method="post" class="add-to-cart-form">
+        <form action="{% url 'add_to_cart' id=article.id %}" method="post" class="add-to-cart-form">
             {% csrf_token %}
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1">
-            <label for="days">Days:</label>
-            <input type="number" id="days" name="days" value="1" min="1">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+            <input type="hidden" id="days" name="days">
             <button type="submit">Add to Cart</button>
         </form>
 
-        <a href="{% url 'articles' %}">Back to Articles</a>
+        <a href="{% url 'articles' %}" class="back-link">Back to Articles</a>
     </div>
+
+    <script>
+        document.getElementById('end_date').addEventListener('change', function() {
+            const startDate = new Date(document.getElementById('start_date').value);
+            const endDate = new Date(document.getElementById('end_date').value);
+            const timeDiff = endDate - startDate;
+            const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            document.getElementById('days').value = daysDiff;
+        });
+    </script>
 </body>
 </html>

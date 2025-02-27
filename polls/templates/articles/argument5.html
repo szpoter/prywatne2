@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ article.title }}</title>
-    <link rel="icon" href="/polls/icons/1.png" type="image/png">
+    <link rel="icon" href="{% static 'polls/icons/1.png' %}" type="image/png">
     <div class="title-container" style="background-image: url('/static/icons/snowboard.jpg');">
     </div>
     
@@ -265,18 +265,28 @@
     {% include 'navbar.html' %}
     <div class="article-container">
         <div class="article-title">{{ article.title }}</div>
-        <div class="article-content"><a>The Premium Snowboard Set is crafted for advanced riders who demand high performance and precision. This set includes a top-tier snowboard that offers exceptional control and stability, even at high speeds. The snowboard is constructed with advanced materials, making it both lightweight and durable. Available in lengths from 150cm to 170cm, this snowboard caters to various riding styles and preferences. The set also features high-quality, adjustable snowboard boots that provide superior comfort and support. With the Premium Snowboard Set, you can confidently tackle challenging terrains and enjoy a thrilling snowboarding experience.</a></div>
+        <div class="article-content"><p>The Premium Snowboard Set is crafted for advanced riders who demand high performance and precision. This set includes a top-tier snowboard that offers exceptional control and stability, even at high speeds. The snowboard is constructed with advanced materials, making it both lightweight and durable. Available in lengths from 150cm to 170cm, this snowboard caters to various riding styles and preferences. The set also features high-quality, adjustable snowboard boots that provide superior comfort and support. With the Premium Snowboard Set, you can confidently tackle challenging terrains and enjoy a thrilling snowboarding experience.</p></div>
         <div class="article-price">Price per day: ${{ article.price }}</div>
         <form action="{% url 'add_to_cart' article.id %}" method="post" class="add-to-cart-form">
             {% csrf_token %}
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1">
-            <label for="days">Days:</label>
-            <input type="number" id="days" name="days" value="1" min="1">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+            <input type="hidden" id="days" name="days">
             <button type="submit">Add to Cart</button>
         </form>
        
-        <a href="{% url 'articles' %}">Back to Articles</a>
+        <a href="{% url 'articles' %}" class="back-link">Back to Articles</a>
     </div>
+    <script>
+        document.getElementById('end_date').addEventListener('change', function() {
+            const startDate = new Date(document.getElementById('start_date').value);
+            const endDate = new Date(document.getElementById('end_date').value);
+            const timeDiff = endDate - startDate;
+            const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            document.getElementById('days').value = daysDiff;
+        });
+    </script>
 </body>
 </html>
