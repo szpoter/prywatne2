@@ -9,6 +9,30 @@
     </div>
 
     <style>
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #0056b3;
+        }
+        
+        a.back-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        
+        a.back-link:hover {
+            color: #0056b3;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -245,7 +269,7 @@
     {% include 'navbar.html' %}
     <div class="article-container">
         <div class="article-title">{{ article.title }}</div>
-        <div class="article-content">{{ article.content }}</div>
+        <div class="article-content"><a>The Economy Ski Set is perfect for beginners and intermediate skiers looking for a reliable and affordable option. This set includes a pair of durable skis designed for various snow conditions, ensuring a smooth and enjoyable ride. The skis are lightweight, making them easy to maneuver, and come in lengths ranging from 150cm to 180cm to accommodate different heights and skill levels. The set also includes comfortable and adjustable ski boots, providing excellent support and warmth. Whether you're hitting the slopes for the first time or looking to improve your skills, the Economy Ski Set offers great value and performance.</a></div>
         <div class="article-price">Price per day: ${{ article.price }}</div>
         <form action="{% url 'add_to_cart' id=article.id %}" method="post" class="add-to-cart-form">
             {% csrf_token %}

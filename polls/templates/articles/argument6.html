@@ -8,6 +8,29 @@
     <div class="title-container" style="background-image: url('/static/icons/snowboard.jpg');">
     </div>
     <style>
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #0056b3;
+        }
+        
+        a.back-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        
+        a.back-link:hover {
+            color: #0056b3;
+        }
             body {
                         font-family: 'Arial', sans-serif;
                         margin: 0;
@@ -240,7 +263,7 @@
                 {% include 'navbar.html' %}
                 <div class="article-container">
                     <div class="article-title">{{ article.title }}</div>
-                    <div class="article-content">{{ article.content }}</div>
+                    <div class="article-content"><a>The Superior Snowboard Set is the ultimate choice for expert riders seeking the best in performance and technology. This set includes a cutting-edge snowboard that delivers unmatched precision and responsiveness, allowing you to carve through the snow with ease. The snowboard is engineered with the latest materials, ensuring maximum strength and minimal weight. Available in lengths from 160cm to 180cm, this snowboard is perfect for those who push the limits of their riding abilities. The set also includes premium snowboard boots that offer exceptional fit and support, enhancing your overall snowboarding experience. Elevate your performance with the Superior Snowboard Set.</a></div>
                     <div class="article-price">Price per day: ${{ article.price }}</div>
                     <form action="{% url 'add_to_cart' article.id %}" method="post" class="add-to-cart-form">
                         {% csrf_token %}
