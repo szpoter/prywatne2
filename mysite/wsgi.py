@@ -1,3 +1,4 @@
+# filepath: [wsgi.py](http://_vscodecontentref_/4)
 import os
 
 from django.core.wsgi import get_wsgi_application
